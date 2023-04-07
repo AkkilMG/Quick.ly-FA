@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection | Quick.ly</title>
+</head>
+
+<bodyclass="flex flex-col min-h-screen bg-cover" style="background-image: url('https://raw.githubusercontent.com/HeimanPictures/img/main/home.jpg?token=GHSAT0AAAAAAB3L4Z6JPWYYEXJY64T5FVBQZBO4T4A')">
+    <div class="-m-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="w-full p-2">
+            <div class="flex h-full cursor-auto items-center break-all rounded-lg bg-gray-500 bg-opacity-20 p-4 shadow-lg backdrop-blur-sm transition-all hover:bg-gray-800 hover:bg-opacity-20">
+                <div class="flex-grow">
+                    <a href="{{ link }}">
+                        <h2 class="title-font font-medium text-gray-200">
+                            <!-- <span class="hidden md:block"> {{ // hidden on small screens excerpt(item.real_url, 29) }} </span> -->
+                            <span class="md:hidden"> {{ link }} </span>
+                        </h2>
+                    </a>
+                    <a href="{{ short }}" target="_blank" class="my-3 flex items-center gap-2">
+                        <p class="text-blue-600 font-bold leading-6">{{ short }}</p>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="text-orange-600 h-4 w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                        </span>
+                    </a>
+
+                    <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+                        <!-- Meta -->
+                        <p class="space-between flex flex-shrink-0 items-center gap-2 text-right font-medium italic text-gray-500">
+                            <span class="flex gap-1 border-r border-r-gray-700 pr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+
+                    <strong>{{ visits }}</strong>
+                  </span> {{ created_at }}
+                        </p>
+
+                        <!-- Action Buttons -->
+                        <div class="flex items-center gap-1">
+                            <!-- Copy To Clipboard button -->
+                            <button onclick="copyurl('{{short}}')" class="text-blue-600/60 hover:text-blue-600 rounded p-1 text-center transition-all hover:bg-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 transition">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+                                </svg>
+                            </button>
+                            <form action="/delete/" method="POST">
+                                <!-- Delete button -->
+                                <button class="rounded p-1 text-center text-red-600/60 transition-all hover:bg-gray-700 hover:text-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    </svg>
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+</html>
