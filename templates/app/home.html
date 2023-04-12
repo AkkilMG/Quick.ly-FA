@@ -7,21 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Quick.ly</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    {% if not auth %}
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    {% endif %} {% include "scroll.html" %}
 </head>
 
-<body class="flex flex-col min-h-screen bg-cover" style="background-image: url('{{ bg }}')">
+<body class="flex flex-col min-h-screen bg-no-repeat bg-cover bg-fixed {{ 'backdrop-blur-sm' if not auth else '' }}" id="journal-scroll" style="background-image: url('{{ bg }}')">
     <page class="flex-grow">
+        <div>
+            {% include 'header.html' %}
+        </div>
 
-        {% include "header.html" %}
-
+        {% if not auth %} {% include 'landing.html' %} {% else %}
         <main class="body-font text-gray-200">
             <div class="container mx-auto flex flex-col items-center justify-center px-5 py-24">
                 <div class="flex w-full flex-col items-center text-center md:w-2/3">
                     <h1 class="w-full title-font text-orange-600 mb-4 text-2xl font-bold sm:text-6xl">
-                        Welcome To
-                        <span class="text-blue-600">Shortener</span>, Explore Powerful!
+                        Welcome To <span class="text-blue-600">Shortener</span>, Explore Powerful!
                     </h1>
-                    <p class="mb-8 leading-relaxed">Copy your long boring url. Paste it below. {% if short %} Then 💥 You got it, right? {% endif %}
+                    <p class="mb-8 leading-relaxed text-white">Copy your long boring url. Paste it below. {% if short %} Then 💥 You got it, right? {% endif %}
                     </p>
                     {% if short %}
                     <div class="flex w-full items-end justify-center">
@@ -47,7 +51,7 @@
                     {% else %}
                     <form class="flex w-full items-end justify-center" method="POST" action="/">
                         <div class="relative mr-4 w-2/4 text-left md:w-full lg:w-full xl:w-1/2">
-                            <label for="long-url" class="text-sm font-semibold leading-10 text-gray-200">Your long Url</label>
+                            <label for="url" class="text-sm font-semibold leading-10 text-gray-200">Your long Url</label>
                             <input class="focus:ring-blue-600 focus:border-blue-600 w-full rounded-md border-y border-transparent border-t-gray-600 bg-gray-700 px-4 py-3 text-lg font-medium leading-8 shadow-2xl outline-none transition duration-200 ease-in-out placeholder:text-gray-400 focus:border focus:bg-transparent focus:ring-2"
                                 id="url" type="url" name="url" placeholder="https://example.com/" required />
                         </div>
@@ -60,12 +64,12 @@
                 </div>
             </div>
         </main>
+        {% endif %}
     </page>
-
     <footer class="text-blue-600 body-font">
         {% include "footer.html" %}
     </footer>
-
+    {% if short %}
     <script>
         function copyurl(url) {
             navigator.clipboard.writeText(url);
@@ -75,6 +79,7 @@
             }, 1000);
         }
     </script>
+    {% endif %}
 </body>
 
 </html>

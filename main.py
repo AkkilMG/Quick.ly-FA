@@ -4,12 +4,16 @@
 
 import uvicorn
 from fastapi import FastAPI
-import app_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from config import *
 
+import router.app_router as app_router
+import router.admin_router as admin_router
+import router.user_router as user_router
+import router.auth_router as auth_router
+import router.page_router as page_router
 
 app = FastAPI(
     title="Shortener",
@@ -41,7 +45,11 @@ app.add_middleware(
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(app_router.router)
+app.include_router(page_router.router)
+app.include_router(auth_router.router)
+app.include_router(user_router.router)
+app.include_router(admin_router.router)
 
 # for local testing
 if __name__ == "__main__":
-  uvicorn.run("main:app", host="0.0.0.0", port=10000, reload=True)
+  uvicorn.run("main:app", host="localhost", port=10000, reload=True)

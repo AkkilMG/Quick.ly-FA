@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Shorten | Quickly</title>
+    {% include "scroll.html" %}
+</head>
+
+<body class="antialiased flex flex-col min-h-screen bg-no-repeat bg-cover bg-fixed backdrop-blur-sm" id="journal-scroll" style="background-image: url('{{ bg }}')">
+    <div id="root">
+        {% include 'dashboardHeader.html' %}
+        <div class="relative md:ml-64">
+            <div class="flex justify-center items-center">
+                <div class="md:pt-12 pt-8 w-3/4 md:w-3/4">
+                    <form class="md:flex flex-row flex-wrap items-center lg:ml-auto mr-3">
+                        <div class="relative flex w-full flex-wrap items-stretch">
+                            <!-- <span class="z-10 h-full leading-snug font-normal absolute sm:hidden text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"><i class="fas fa-search"></i></span> -->
+                            <input type="text" placeholder="Search here..." class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="relative md:pt-32 pb-32 pt-12">
+                <div class="px-4 md:px-10 mx-auto w-full">
+                    <div>
+                        <!-- Card stats -->
+                        <div class="flex flex-wrap">
+                            <!-- 1 -->
+                            <div class="relative pb-32">
+                                <div class="mx-auto w-full px-4 md:px-10">
+                                    <div>
+                                        <!-- Card main -->
+                                        <div class="flex flex-wrap overflow-auto">
+                                            <!-- Card component -->
+                                            {% for sh in shorts %}
+                                            <div class="w-full px-4 pt-3 pb-3 lg:w-6/12 xl:w-6/12">
+                                                <div class="relative mb-6 flex min-w-0 flex-col break-words rounded bg-gray-800 bg-opacity-60 shadow-lg xl:mb-0">
+                                                    <div class="flex-auto p-4">
+                                                        <div class="flex flex-wrap">
+                                                            <div class="relative w-full max-w-full flex-1 flex-grow pr-4">
+                                                                <h5 class="text-blueGray-400 text-xs font-bold uppercase">LONG LINK</h5>
+                                                                <div class="relative pt-3">
+                                                                    <input class="text-blueGray-700 w-full rounded-md border-y border-transparent border-t-gray-600 px-4 py-3 text-lg font-medium leading-8 shadow-2xl outline-none transition duration-200 ease-in-out focus:border focus:border-blue-600 focus:text-white focus:bg-transparent focus:ring-2 focus:ring-blue-600"
+                                                                        value="{{ sh.url }}" readonly />
+                                                                    <a href="{{ sh.url }}" target="_blank">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="absolute right-3 top-1/2 h-6 w-6 -translate-y-1/2 transform text-orange-600">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                                <h5 class="text-blueGray-400 pt-5 text-xs font-bold uppercase">SHORTEN URL</h5>
+                                                                <div class="relative pt-3">
+                                                                    <input class="text-blueGray-700 w-full rounded-md border-y border-transparent border-t-gray-600 px-4 py-3 text-lg font-medium leading-8 shadow-2xl outline-none transition duration-200 ease-in-out focus:border focus:border-blue-600 focus:text-white focus:bg-transparent focus:ring-2 focus:ring-blue-600"
+                                                                        value="{{domain}}s/{{ sh.short }}" readonly />
+                                                                    <a href="{{domain}}s/{{ sh.short }}" target="_blank">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="absolute right-3 top-1/2 h-6 w-6 -translate-y-1/2 transform text-orange-600">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+                                                            <!-- Meta -->
+                                                            <p class="space-between flex flex-shrink-0 items-center gap-2 text-right font-medium italic text-white">
+                                                                <span class="flex">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                    </svg>
+                                                
+                                                                    <strong>{{ sh.visits }}</strong>
+                                                                    </span> |
+                                                                <span class="flex">
+                                                                    <i class="fas fa-rocket opacity-75 mr-2 text-sm "></i>
+                                                                    <strong>{{ sh.report }}</strong>
+                                                                </span> | {{ sh.created_at }}
+                                                            </p>
+
+                                                            <!-- Action Buttons -->
+                                                            <div class="flex items-center gap-1">
+                                                                <!-- Copy To Clipboard button -->
+                                                                <button onclick="copyurl('{{domain}}s/{{ sh.short }}')" class="rounded p-1 text-center text-emerald-600 transition-all hover:bg-gray-700 hover:text-emerald-600">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 transition">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+                                                                    </svg>
+                                                                </button>
+                                                                <!-- Delete button -->
+                                                                <button class="rounded p-1 text-center text-red-600/60 transition-all hover:bg-gray-700 hover:text-red-600" onclick="deleteURL('{{ sh._id }}')">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                                        </svg>
+                                                                    </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        /* Sidebar - Side navigation menu on mobile/responsive mode */
+        function toggleNavbar(collapseID) {
+            document.getElementById(collapseID).classList.toggle("hidden");
+            document.getElementById(collapseID).classList.toggle("bg-gray-800");
+            document.getElementById(collapseID).classList.toggle("m-2");
+            document.getElementById(collapseID).classList.toggle("py-3");
+            document.getElementById(collapseID).classList.toggle("px-6");
+        }
+        /* Function for dropdowns */
+        function openDropdown(event, dropdownID) {
+            let element = event.target;
+            while (element.nodeName !== "A") {
+                element = element.parentNode;
+            }
+            var popper = Popper.createPopper(element, document.getElementById(dropdownID), {
+                placement: "bottom-end"
+            });
+            document.getElementById(dropdownID).classList.toggle("hidden");
+            document.getElementById(dropdownID).classList.toggle("block");
+        }
+
+        function copyurl(url) {
+            navigator.clipboard.writeText(url);
+            $('[data-toggle="popover"]').popover('show');
+            setTimeout(function() {
+                $('[data-toggle="popover"]').popover('hide');
+            }, 1000);
+        }
+
+        function deleteURL(id) {
+            // Define the data to be sent in the request
+            const data = {
+                id: id
+            };
+
+            // Define the options for the request
+            const options = {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+
+            // Send the request using the Fetch API
+            fetch("{{ domain }}delete/", options)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+</body>
+
+</html>

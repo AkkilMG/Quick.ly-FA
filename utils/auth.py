@@ -1,12 +1,16 @@
 
 
 import hashlib
+import jwt
+import string
 import random
-import smtplib
-import asyncio
-import random
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from jwt.exceptions import DecodeError
+# import smtplib
+# # import asyncio
+# import random
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.text import MIMEText
+from datetime import datetime, timedelta
 
 from config import *
 
@@ -38,43 +42,64 @@ class Auth():
         return test_hashed_password == hashed_password
     
     @staticmethod
-    async def emailVerify(name:str, mail:str, url:str):
-        try:
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()
-            server.login(MAIL, PASS)
-            message = MIMEMultipart("alternative")
-            message["Subject"] = "Mail verification"
-            message["From"] = MAIL
-            message["To"] = mail
-            msg = MIMEText(MSG_EMAIL.format(name=name, verify1=url, verify2=url), "html")
-            message.attach(msg)
-            server.sendmail(MAIL, mail, message.as_string())
-            server.quit()
-            return True
-        except Exception as e:
-            print(f"Email verified: {{e}}")
-            return False
+    def create_access_token(data: dict):
+        expire = datetime.utcnow() + timedelta(hours=24)
+        to_encode = data.copy()
+        to_encode.update({'exp': expire})
+        encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm='HS256')
+        return encoded_jwt
 
     @staticmethod
-    async def phoneNumberVerify(name:str, phone:str):
-        otp = ''.join([str(random.randint(0,9)) for i in range(6)])
-        
-        return otp
-    
-    @staticmethod
-    async def emailForgotPassword(name:str, mail:str, url:str):
+    def decode_access_token(token: str):
         try:
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()
-            server.login(MAIL, PASS)
-            message = MIMEMultipart("alternative")
-            message["Subject"] = "Reset password"
-            message["From"] = MAIL
-            message["To"] = mail
-            msg = MIMEText(PASS_MSG_EMAIL.format(name=name, reset1=url, reset2=url), "html")
-            message.attach(msg)
-            server.sendmail(MAIL, mail, message.as_string())
-            server.quit()
-        except Exception as e:
-            print("Auth: "+e)
+            decoded_jwt = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+            return decoded_jwt
+        except DecodeError:
+            return None
+        
+    @staticmethod
+    def key(username: str, email: str):
+        k = ''.join(random.choice(string.ascii_letters + string.digits + string.punctuation) for i in range(20))
+        return hashlib.sha256((username + email).encode('utf-8') + k.encode('utf-8')).hexdigest()[:24]
+
+    # @staticmethod
+    # async def emailVerify(name:str, mail:str, url:str):
+    #     try:
+    #         server = smtplib.SMTP('smtp.gmail.com', 587)
+    #         server.starttls()
+    #         server.login(MAIL, PASS)
+    #         message = MIMEMultipart("alternative")
+    #         message["Subject"] = "Mail verification"
+    #         message["From"] = MAIL
+    #         message["To"] = mail
+    #         msg = MIMEText(MSG_EMAIL.format(name=name, verify1=url, verify2=url), "html")
+    #         message.attach(msg)
+    #         server.sendmail(MAIL, mail, message.as_string())
+    #         server.quit()
+    #         return True
+    #     except Exception as e:
+    #         print(f"Email verified: {{e}}")
+    #         return False
+
+    # @staticmethod
+    # async def phoneNumberVerify(name:str, phone:str):
+    #     otp = ''.join([str(random.randint(0,9)) for i in range(6)])
+        
+    #     return otp
+    
+    # @staticmethod
+    # async def emailForgotPassword(name:str, mail:str, url:str):
+    #     try:
+    #         server = smtplib.SMTP('smtp.gmail.com', 587)
+    #         server.starttls()
+    #         server.login(MAIL, PASS)
+    #         message = MIMEMultipart("alternative")
+    #         message["Subject"] = "Reset password"
+    #         message["From"] = MAIL
+    #         message["To"] = mail
+    #         msg = MIMEText(PASS_MSG_EMAIL.format(name=name, reset1=url, reset2=url), "html")
+    #         message.attach(msg)
+    #         server.sendmail(MAIL, mail, message.as_string())
+    #         server.quit()
+    #     except Exception as e:
+    #         print("Auth: "+e)

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
+    <title>Profile | Quickly</title>
+</head>
+
+<body class="antialiased flex flex-col min-h-screen bg-no-repeat bg-cover bg-fixed backdrop-blur-sm" id="journal-scroll" style="background-image: url('{{ bg }}')">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+        {% include 'dashboardHeader.html' %}
+        <div class="relative md:ml-64">
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        /* Sidebar - Side navigation menu on mobile/responsive mode */
+        function toggleNavbar(collapseID) {
+            document.getElementById(collapseID).classList.toggle("hidden");
+            document.getElementById(collapseID).classList.toggle("bg-gray-800 bg-opacity-70");
+            document.getElementById(collapseID).classList.toggle("m-2");
+            document.getElementById(collapseID).classList.toggle("py-3");
+            document.getElementById(collapseID).classList.toggle("px-6");
+        }
+        /* Function for dropdowns */
+        function openDropdown(event, dropdownID) {
+            let element = event.target;
+            while (element.nodeName !== "A") {
+                element = element.parentNode;
+            }
+            var popper = Popper.createPopper(element, document.getElementById(dropdownID), {
+                placement: "bottom-end"
+            });
+            document.getElementById(dropdownID).classList.toggle("hidden");
+            document.getElementById(dropdownID).classList.toggle("block");
+        }
+    </script>
+</body>
+
+</html>

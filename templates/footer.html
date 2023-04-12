@@ -1,11 +1,15 @@
-<div class="container flex flex-col items-center px-5 py-5 mx-auto sm:flex-row">
+<div class="container flex flex-col items-center px-5 py-2 mx-auto sm:flex-row">
     <p class="mt-4 text-sm text-white">
-        © 2023 Quick.ly — Made with <span class="text-red-700">❤️</span> by
+        © <span id="javascript-date"></span> Quick.ly — Made with <span class="text-red-700">❤️</span> by
         <a href="https://github.com/HeimanPictures" class="ml-1 text-orange-600" rel="noopener noreferrer" target="_blank">
-                AkkilMG
-            </a>
+            AkkilMG
+        </a>
     </p>
-    <span class="inline-flex justify-center mt-5 sm:ml-auto sm:mt-0 sm:justify-start">
+    <span class="inline-flex justify-center mt-4 text-sm sm:ml-auto sm:mt-0 sm:justify-start">
+        <a href="/privacy-policy" class="text-white hover:text-orange-600">Privacy Policy</a>
+        <a href="/terms-and-condition" class="ml-4 text-white hover:text-orange-600">Terms & Condition</a>
+    </span>
+    <span class="inline-flex justify-center mt-5 text-sm sm:ml-auto sm:mt-0 sm:justify-start">
             <!-- Youtube -->
             <a href="https://www.youtube.com/channel/UC_lor4QKXLB1HxaE4GZXaVQ" target="_blank" class="ml-5 text-white">
                 <svg fill="currentColor" viewBox="0 0 24 24" stroke-width="2" class="w-5 h-5">
@@ -31,4 +35,9 @@
                 </svg>
             </a>
         </span>
+    <script>
+        (function() {
+            document.getElementById("javascript-date").innerHTML = new Date().getFullYear();
+        })();
+    </script>
 </div>

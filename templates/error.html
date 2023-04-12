@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error | Quick.ly</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    {% include "scroll.html" %}
 </head>
 
-<body>
+<body id="journal-scroll">
     <main>
         <div class="bg-indigo-900 relative overflow-hidden h-screen">
-            <img src="{{ bg }}" class="absolute h-full w-full object-cover" />
+            <img src="{{ bg }}" class="absolute h-full w-full object-cover  bg-fixed" />
             <!-- <img src="https://raw.githubusercontent.com/HeimanPictures/tool/main/images/error.svg" class="absolute h-full w-full object-cover" /> -->
             <div class="inset-0 bg-black opacity-25 absolute">
             </div>

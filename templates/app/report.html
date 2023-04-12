@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGNIN | Quick.ly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% include "scroll.html" %}
+</head>
+
+<body class="flex flex-col min-h-screen bg-cover bg-fixed" id="journal-scroll" style="background-image: url('{{ bg }}');">
+    <div>
+        {% include "header.html" %}
+    </div>
+
+    <main class="bg-gray-800 bg-opacity-60 max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section>
+            <h3 class="font-bold text-white text-2xl">Report link to Quickly</h3>
+            <!-- <p class="text-gray-200 pt-2">Sign in with us now!</p> -->
+        </section>
+
+        <section class="mt-10">
+            <form class="flex flex-col" method="POST" action="/report">
+                <div class="mb-6 pt-3 rounded">
+                    <label class="text-sm font-semibold leading-10 text-gray-200" for="username">Shorten URL</label>
+                    <input required type="url" id="url" name="url" class="text-white focus:ring-blue-600 focus:border-blue-600 w-full rounded-md border-y border-transparent border-t-gray-600 bg-gray-700 px-4 py-3 text-lg font-medium leading-8 shadow-2xl outline-none transition duration-200 ease-in-out placeholder:text-gray-400 focus:border focus:ring-2">
+                </div>
+                {% if error %}
+                <p class="text-md text-red-500 my-4 w-full animate-pulse font-semibold">{{ error }}</p>
+                {% endif %}
+                <button class="bg-orange-600 hover:ring-2 hover:ring-orange-400 flex-shrink-0 rounded border-0 px-6 py-4 text-lg font-semibold text-white transition focus:outline-none text-center" type="submit">Sign In</button>
+            </form>
+        </section>
+    </main>
+
+    <div class="max-w-lg mx-auto text-center mt-12 mb-6">
+        <p class="text-white">Don't have an account? <a href="/signup" class="font-bold hover:text-orange-600">Sign up</a>.</p>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+
+</html>
