@@ -33,8 +33,8 @@
 ## Installation
 
 ```bash
-git clone https://github.com/HeimanPictures/FastApi-Boiler
-cd FastApi-Boiler
+git clone https://github.com/HeimanPictures/Quick.ly
+cd Quick.ly
 pip install -r requirements.txt
 python main.py
 ```
