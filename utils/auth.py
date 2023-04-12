@@ -58,7 +58,7 @@ class Auth():
             return None
         
     @staticmethod
-    def key(username: str, email: str):
+    async def key(username: str, email: str):
         k = ''.join(random.choice(string.ascii_letters + string.digits + string.punctuation) for i in range(20))
         return hashlib.sha256((username + email).encode('utf-8') + k.encode('utf-8')).hexdigest()[:24]
 

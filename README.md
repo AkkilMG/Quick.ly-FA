@@ -11,11 +11,11 @@
 - [x] Error page
 - [x] Contact page
 - [x] Blogs page
-- [ ] Report link
+- [x] Report link
 - [ ] User
     - [ ] Dashboard page
     - [ ] Profile
-    - [ ] Links
+    - [x] Links
     - [ ] Analytics
     - [ ] Settings
 - [ ] Admin
@@ -24,9 +24,9 @@
     - [ ] Users
     - [ ] Links
     - [ ] Analytics
-- [ ] Cache [[Redis](https://redis.io/)]
-- [ ] Cookie [[Redis](https://redis.io/)]
-- [ ] API (for developers)
+- [ ] Cache
+- [ ] Cookie
+- [x] API (for developers)
 - [ ] Documentation
 
 
@@ -36,18 +36,7 @@
 git clone https://github.com/HeimanPictures/FastApi-Boiler
 cd FastApi-Boiler
 pip install -r requirements.txt
-```
-
-### Test
-
-```bash
-uvicorn main:app --reload  
-```
-
-### Production
-
-```bash
-uvicorn main:app --host
+python main.py
 ```
 
 ## Credits
@@ -56,3 +45,4 @@ uvicorn main:app --host
 - [Python](https://www.python.org/)
 - [Fastapi](https://fastapi.tiangolo.com/)
 - [MongoDB](https://www.mongodb.com/)
+- [CreativeTim](https://github.com/creativetimofficial/) for Dashboard template.

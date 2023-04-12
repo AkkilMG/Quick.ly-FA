@@ -36,3 +36,4 @@ watchgod==0.6
 websockets==8.1
 aiofiles
 python-multipart
+PyJWT

@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 
 from config import *
 
+import router.api_router as api_router
 import router.app_router as app_router
 import router.admin_router as admin_router
 import router.user_router as user_router
@@ -44,6 +45,7 @@ app.add_middleware(
 )
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(api_router.router)
 app.include_router(app_router.router)
 app.include_router(page_router.router)
 app.include_router(auth_router.router)

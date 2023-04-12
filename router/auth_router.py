@@ -106,21 +106,21 @@ async def signup(request: Request, response: Response):
         "short": []
     }
     rt = await authdb.insert_one(res)
-    if await Auth.emailVerify(name, email, f"{DOMAIN}/verify/{rt.inserted_id}"):
-        context={
+    # if await Auth.emailVerify(name, email, f"{DOMAIN}/verify/{rt.inserted_id}"):
+    context={
             "request": request,
             "auth": bool(1),
             "bg": request.url_for("static", path="home.jpg"),
-        }
-        return templates.TemplateResponse("signin.html", context)
-    else:
-        context={
-            "request": request,
-            "error": "Something went wrong",
-            "bg": request.url_for("static", path="home.jpg"),
-            "auth": bool(1)
-        }
-        return templates.TemplateResponse("signup.html", context)
+    }
+    return templates.TemplateResponse("signin.html", context)
+    # else:
+    #     context={
+    #         "request": request,
+    #         "error": "Something went wrong",
+    #         "bg": request.url_for("static", path="home.jpg"),
+    #         "auth": bool(1)
+    #     }
+    #     return templates.TemplateResponse("signup.html", context)
     
 @router.get("/signup", response_class=HTMLResponse)
 async def signup(request: Request, response: Response):
